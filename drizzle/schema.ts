@@ -1,27 +1,48 @@
 import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const usersTable = pgTable('users_table', {
+// Users table
+export const usersTable = pgTable('users', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
-  age: integer('age').notNull(),
   email: text('email').notNull().unique(),
+  emailVerified: timestamp('emailVerified'),
+  avatar: text('image'), // Renamed to 'avatar' for better clarity
 });
 
-export const postsTable = pgTable('posts_table', {
+// Accounts table
+export const accountsTable = pgTable('accounts', {
   id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  userId: integer('user_id')
+  userId: integer('userId')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at')
-    .notNull()
-    .$onUpdate(() => new Date()),
+  type: text('type').notNull(),
+  provider: text('provider').notNull(),
+  providerAccountId: text('providerAccountId').notNull(),
+  refreshToken: text('refresh_token'),
+  accessToken: text('access_token'),
+  expiresAt: timestamp('expires_at'),
+  tokenType: text('token_type'),
+  scope: text('scope'),
+  idToken: text('id_token'),
+  sessionState: text('session_state'),
 });
 
+// Sessions table
+export const sessionsTable = pgTable('sessions', {
+  id: serial('id').primaryKey(),
+  sessionToken: text('sessionToken').notNull().unique(),
+  userId: integer('userId')
+    .notNull()
+    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  expires: timestamp('expires').notNull(),
+});
+
+// Type inference
 export type InsertUser = typeof usersTable.$inferInsert;
 export type SelectUser = typeof usersTable.$inferSelect;
 
-export type InsertPost = typeof postsTable.$inferInsert;
-export type SelectPost = typeof postsTable.$inferSelect;
+export type InsertAccount = typeof accountsTable.$inferInsert;
+export type SelectAccount = typeof accountsTable.$inferSelect;
+
+export type InsertSession = typeof sessionsTable.$inferInsert;
+export type SelectSession = typeof sessionsTable.$inferSelect;

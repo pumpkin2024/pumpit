@@ -16,7 +16,7 @@ const benefitList: BenefitsProps[] = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
   },
   {
-    icon: "LineChart",
+    icon: "ChartLine",
     title: "More Leads",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, natus consectetur.",

@@ -22,6 +22,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ToggleTheme } from "./toogle-theme";
+import { AuthButton } from "./auth/authButton";
 
 interface RouteProps {
   href: string;
@@ -71,6 +72,7 @@ const featureList: FeatureProps[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
       <Link href="/" className="font-bold text-lg flex items-center">
@@ -89,7 +91,7 @@ export const Navbar = () => {
 
           <SheetContent
             side="left"
-            className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary"
+            className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary w-2/3"
           >
             <div>
               <SheetHeader className="mb-4 ml-4">
@@ -116,10 +118,11 @@ export const Navbar = () => {
               </div>
             </div>
 
-            <SheetFooter className="flex-col sm:flex-col justify-start items-start">
+            <SheetFooter className="flex-col sm:flex-col justify-start items-start gap-2">
+              <ToggleTheme />
               <Separator className="mb-2" />
 
-              <ToggleTheme />
+              <AuthButton ifmobile={true} />
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -172,7 +175,7 @@ export const Navbar = () => {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="hidden lg:flex">
+      <div className="hidden lg:flex items-center">
         <ToggleTheme />
 
         <Button asChild size="sm" variant="ghost" aria-label="View on GitHub">
@@ -184,6 +187,7 @@ export const Navbar = () => {
             <Github className="size-5" />
           </Link>
         </Button>
+        <AuthButton />
       </div>
     </header>
   );

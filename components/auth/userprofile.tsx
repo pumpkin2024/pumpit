@@ -32,7 +32,7 @@ export function UserProfile({ ifmobile }: UserProfileProps) {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">
+              <span className="truncate font-semibold ">
                 {session?.user?.name}
               </span>
               <span className="truncate text-xs">{session?.user?.email}</span>
@@ -46,44 +46,44 @@ export function UserProfile({ ifmobile }: UserProfileProps) {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="lg:w-80">
-        <DropdownMenuLabel className="p-0 font-normal lg:">
-          <div className="flex items-center gap-2 px-1 py-1.5 text-left text-lg">
+        <DropdownMenuLabel className="p-0 font-normal ">
+          <div className="flex items-center gap-2 px-1 py-1.5 text-left ">
             <Avatar className=" rounded-lg">
               <AvatarImage src={session?.user?.image ?? undefined} />
               <AvatarFallback className="rounded-lg">You</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-lg leading-tight">
-              <span className="truncate font-semibold">
+              <span className="truncate font-semibold text-sm lg:text-lg">
                 {session?.user?.name}
               </span>
-              <span className="truncate text-xs">{session?.user?.email}</span>
+              <span className="truncate text-xs lg:text-sm">{session?.user?.email}</span>
             </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="text-sm lg:text-base">
             <Sparkles />
             Upgrade to Pro
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="text-sm lg:text-base">
             <BadgeCheck />
             Account
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="text-sm lg:text-base">
             <CreditCard />
             Billing
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="text-sm lg:text-base">
             <Bell />
             Notifications
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem className="text-sm lg:text-base" onClick={() => signOut()}>
           <LogOut />
           Log out
         </DropdownMenuItem>
